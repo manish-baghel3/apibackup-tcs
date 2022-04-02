@@ -1,0 +1,5 @@
+{
+    "exec": "npm run swagger && npm run start-dev",
+    "watch": ["src"],
+    "ext": "ts"
+  }

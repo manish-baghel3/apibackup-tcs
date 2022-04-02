@@ -1,0 +1,40 @@
+{
+  "entryFile": "src/index.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "spec": {
+    "securityDefinitions": {
+      "jwt": {
+        "name": "Authorization",
+        "in": "header",
+        "type": "apiKey",
+        "description": "login -> copy token -> paste it here"
+      }
+    },
+    "tags": [
+      {
+        "name": "User Authentication",
+        "description": "Authentication API for Users."
+      },
+      {
+        "name": "User Roles"
+      },
+      {
+        "name": "Products"
+      },
+      {
+        "name": "Brands"
+      },
+      {
+        "name": "Product Categories"
+      },
+      {
+        "name": "Product SubCategories"
+      }
+    ],
+    "routes": {
+      "authenticationModule": "./authentication.ts"
+    },
+    "outputDirectory": "public",
+    "specVersion": 3
+  }
+}

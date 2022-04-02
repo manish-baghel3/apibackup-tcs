@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>OnlyForGood - API Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Import Poppins Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style type="text/css">
+      body {
+        font-family: "Poppins", sans-serif;
+        color: rgb(116, 56, 56);
+        margin: 0px !important;
+        background-color: blanchedalmond;
+      }
+
+      .OnlyForGood {
+        letter-spacing: 0.2rem;
+        font-size: 5rem;
+        font-weight: 150;
+      }
+
+      .hero-message {
+        width: 100%;
+        text-align: center;
+      }
+
+      .hero-message img {
+        width: 100%;
+        max-width: 320px;
+      }
+
+      .hero-description {
+        width: 100%;
+        margin-top: 5px;
+        text-align: center;
+        font-size: 17px;
+        font-weight: 300;
+        letter-spacing: 2px;
+        opacity: 0.8;
+      }
+
+      .routeButtons {
+        width: 100%;
+        margin-top: 20vh;
+        text-align: center;
+        font-size: 28px;
+        font-weight: 200;
+        letter-spacing: 1px;
+      }
+
+      .button {
+        padding: 10px;
+        margin: 10px;
+        color: black;
+        border-radius: 10px;
+      }
+
+      .footer {
+        width: 100%;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        text-align: center;
+        font-size: 1rem;
+        font-weight: 200;
+        background-color: rgb(53, 53, 53);
+        color: snow;
+        padding-block: 0.5rem;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .hero-message img {
+          max-width: 70%;
+        }
+
+        .hero-description {
+          max-width: 80% !important;
+          margin-left: auto;
+          margin-right: auto;
+          font-size: 16px;
+        }
+
+        .OnlyForGood {
+        /* letter-spacing: 0.2rem; */
+        font-size: 4rem;
+        font-weight: 100;
+      }
+
+        .routeButtons {
+          margin-top: 10vh;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <div class="hero-message">
+        <h1 class="OnlyForGood">Tania Clay Services API</h1>
+      </div>
+      <!-- <div class="hero-description">
+        Behavioural Intelligence for Climate Action
+      </div> -->
+      <div class="routeButtons">
+        <a href="/swagger" class="button">Go to /swagger</a>
+      </div>
+      <div class="footer">
+        Copyright @ 2021 OnlyForGood. All rights reserved.
+      </div>
+    </div>
+  </body>
+</html>

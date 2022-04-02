@@ -1,0 +1,6 @@
+{
+  "SERVER_TOKEN_SECRET": "3SSMSD1954",
+  "NODE_ENV": "develop",
+  "PORT": 3401,
+  "db_url": "mongodb+srv://TCSADMIN:TCSADMIN@cluster0.eq2vx.mongodb.net/onlyForGoodDB?retryWrites=true&w=majority"
+}
