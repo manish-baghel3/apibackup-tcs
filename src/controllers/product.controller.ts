@@ -1,105 +1,76 @@
-import express from "express";
-import ProductSwagger from "../decorators/product.swagger";
+import {
+  Get,
+  Post,
+  Put,
+  Delete,
+  Route,
+  Tags,
+  Body,
+  Security,
+  Query,
+} from "tsoa";
+import { IProduct } from "../entity/product.model";
+import { ProductService } from "../services/product.service";
 
-export default class ProductController {
-  public router = express.Router();
-  constructor() {
-    this.intializeRoutes();
-  }
-  public intializeRoutes() {
-    this.router.get("/", this.getAllProduct);
-    this.router.get("/:id", this.getProductByID);
-    this.router.post("/createProduct", this.createProduct);
-    this.router.put("/:id", this.updateProduct);
-    this.router.delete("/:id", this.deleteProduct);
-  }
+interface Response {
+  error: boolean;
+  message: string;
+}
 
-  public async getAllProduct(req, res: express.Response) {
-    const userId = req.headers.user;
-    try {
-      console.log({ message: "Fetching All Products", userId });
-      const controller = new ProductSwagger();
-      const response = await controller.getAllProduct();
-      console.log({ message: "GetAllProduct Operation Success.", userId });
-      return res.json(response);
-    } catch (err) {
-      console.log({ message: "GetAllProducts Operation Failed.", err, userId });
-      res.status(500).end();
-    }
-  }
+@Route("product")
+@Tags("Products")
+export default class ProductSwagger {
 
-  public async getProductByID(req, res: express.Response) {
-    const userId = req.headers.user;
-    try {
-      let id = req.params.id;
-      if(!id){
-        console.log({ message: "Request Parameter ID not found.", userId });
-      } else {
-        console.log({ message: "Fetching Products by ID : " + id, userId });
-      }
-      const controller = new ProductSwagger();
-      const response = await controller.getProductByID(id);
-      console.log({ message: "GetProductByID Operation Success.", userId });
-      return res.json(response);
-    } catch (err) {
-      console.log({ message: "GetProductByID Operation Failed.", err, userId });
-      res.status(500).end();
-    }
+  // @Security("jwt")
+  @Post("/createProduct")
+  public async createProduct(
+    @Body() request: IProduct
+  ): Promise<Response> {
+    const service = new ProductService();
+    const res = await service.createProduct(request);
+    return res;
   }
 
-  public async createProduct(req, res: express.Response) {
-    const userId = req.headers.user;
-    try {
-      console.log({ message: "Creating / Add User", Body: req.body, userId });
-      const controller = new ProductSwagger();
-      const response = await controller.createProduct(req);
-      console.log({ message: "CreateProduct Operation Success.", userId });
-      return res.json(response);
-    } catch (err) {
-      console.log({ message: "CreateProduct Operation Failed.", err, userId });
-      res.status(500).end();
-    }
+  // @Security("jwt")
+  @Get("/")
+  public async getAllProduct(@Query() categoryId: string,@Query() subCategoryId: string,@Query() brandId: string,@Query() userId: string,): Promise<IProduct[]> {
+    const service = new ProductService();
+    const res = await service.getAllProduct(categoryId,subCategoryId,brandId,userId);
+    return res;
   }
 
-  public async updateProduct(req, res: express.Response) {
-    const userId = req.headers.user;
-    try {
-      let id = req.params.id;
-      if (!id) {
-        console.log({ message: "Request Parameter ID not found.", userId });
-      } else {
-        console.log({
-          message: "Updating Product by ID : " + id,
-          Body: req.body,
-          userId,
-        });
-      }
-      const controller = new ProductSwagger();
-      const response = await controller.updateProduct(id, req);
-      console.log({ message: "UpdateProduct Operation Success.", userId });
-      return res.json(response);
-    } catch (err) {
-      console.log({ message: "UpdateProduct Operation Failed.", err, userId });
-      res.status(500).end();
-    }
+  // @Security("jwt")
+  @Get("/all")
+  public async getAllProducts(): Promise<IProduct[]> {
+    const service = new ProductService();
+    const res = await service.getAllProducts();
+    return res;
   }
 
-  public async deleteProduct(req: express.Request, res: express.Response) {
-    const userId = req.headers.user;
-    try {
-      let id = req.params.id;
-      if (!id) {
-        console.log({ message: "Request Parameter ID not found.", userId });
-      } else {
-        console.log({ message: "Deleting Product by ID : " + id, userId });
-      }
-      const controller = new ProductSwagger();
-      const response = await controller.deleteProduct(id);
-      console.log({ message: "DeleteProduct Operation Success.", userId });
-      return res.json(response);
-    } catch (err) {
-      console.log({ message: "DeleteProduct Operation Failed.", err, userId });
-      res.status(500).end();
-    }
+  // @Security("jwt")
+  @Get("/:id")
+  public async getProductByID(id:string): Promise<IProduct> {
+    const service = new ProductService();
+    const res = await service.getProductByID(id);
+    return res;
+  }
+
+  // @Security("jwt")
+  @Put("/:id")
+  public async updateProduct(
+    id: string,
+    @Body() request: IProduct
+  ): Promise<Response> {
+    const service = new ProductService();
+    const res = await service.updateProduct(id, request);
+    return res;
+  }
+
+  // @Security("jwt")
+  @Delete("/:id")
+  public async deleteProduct(id: string): Promise<IProduct> {
+    const service = new ProductService();
+    const res = await service.deleteProduct(id);
+    return res;
   }
 }
